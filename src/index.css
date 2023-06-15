@@ -1,1 +1,11 @@
+.App {
+  /* display: flex; */
+  padding: 30px;
+}
 
+.App > div {
+  margin-right: 50px;
+}
+ul {
+  list-style: none;
+}
