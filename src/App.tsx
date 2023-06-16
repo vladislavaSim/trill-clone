@@ -13,13 +13,17 @@ function App() {
 
   const [tasks, setTasks] = useState(tasks1)
   
-  function deleteTask(task: Task) {
-    setTasks(tasks.filter(t => t.id !== task.id))
+  function deleteTask(id: number) {
+    setTasks(tasks.filter(t => t.id !== id))
+  }
+
+  function addTask(task: Task) {
+    setTasks([...tasks, task])
   }
 
   return (
     <div className="App">
-      <TodoList title={'My tasks'} tasks={tasks} deleteTask={deleteTask}/>
+      <TodoList title={'My tasks'} tasks={tasks} deleteTask={deleteTask} addTask={addTask}/>
     </div>
   );
 }

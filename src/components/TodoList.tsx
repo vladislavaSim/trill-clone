@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export type Task = {
     id: number,
@@ -9,23 +9,41 @@ export type Task = {
 type PropsType = {
     title: string | undefined,
     tasks: Task[],
-    deleteTask: (task: Task) => void
+    deleteTask: (id: number) => void
+    addTask: (task: Task) => void
 }
 export default function TodoList(props: PropsType) {
+    const [newTaskName, setNewTaskName] = useState('')
+
+    console.log(newTaskName);
+   
+
+    function makeNewTask() {
+        let obj: Task = {id: props.tasks[props.tasks.length - 1].id + 1,
+                        name: newTaskName, 
+                        isDone: false};
+        props.addTask(obj)
+        setNewTaskName('')
+    }
+    
   return (
     <>
         <h3>{props.title}</h3>
         <div>
-            <input type="text" />
-            <button>add</button>
+            <input type="text" onChange={(e) => setNewTaskName(e.target.value)} value={newTaskName}/>
+            <button 
+            disabled={!newTaskName}
+            onClick={() => makeNewTask()}>
+                add
+            </button>
         </div>
         <div>
             <ul>
-                {props.tasks.map(task => {
-                    return <li>
+                {props.tasks.map((task, key) => {
+                    return <li key={key}>
                         <span>{task.name}</span>
                         {/* <input type="checkbox" checked={task.isDone}/> */}
-                        <button onClick={() => props.deleteTask(task)}>x</button>
+                        <button onClick={() => props.deleteTask(task.id)}>x</button>
                     </li>
                 })}
             </ul>
