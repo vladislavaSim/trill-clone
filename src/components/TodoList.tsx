@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export type Task = {
     id: number,
@@ -11,11 +11,13 @@ type PropsType = {
     tasks: Task[],
     deleteTask: (id: number) => void
     addTask: (task: Task) => void
+    changeIsDone: (id: number) => void 
 }
 export default function TodoList(props: PropsType) {
     const [newTaskName, setNewTaskName] = useState('')
+    const [tasksList, setTasksList] = useState(props.tasks)
 
-    console.log(newTaskName);
+    console.log(props.tasks);
    
 
     function makeNewTask() {
@@ -25,6 +27,13 @@ export default function TodoList(props: PropsType) {
         props.addTask(obj)
         setNewTaskName('')
     }
+console.log('list');
+
+    useEffect(() => {
+        // console.log(props.tasks);
+        console.log('taskslist');
+        setTasksList(props.tasks)
+    }, [props.tasks])
     
   return (
     <>
@@ -39,10 +48,12 @@ export default function TodoList(props: PropsType) {
         </div>
         <div>
             <ul>
-                {props.tasks.map((task, key) => {
+                {tasksList.map((task, key) => {
                     return <li key={key}>
                         <span>{task.name}</span>
-                        {/* <input type="checkbox" checked={task.isDone}/> */}
+                        <input type="checkbox" 
+                            checked={task.isDone} 
+                            onChange={() => props.changeIsDone(task.id)}/>
                         <button onClick={() => props.deleteTask(task.id)}>x</button>
                     </li>
                 })}
