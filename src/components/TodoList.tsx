@@ -11,14 +11,16 @@ type PropsType = {
     tasks: Task[],
     deleteTask: (id: number) => void
     addTask: (task: Task) => void
-    changeIsDone: (id: number) => void 
+    changeIsDone: (id: number) => void
+    setFilterType: (filterType: string) => void
 }
 export default function TodoList(props: PropsType) {
     const [newTaskName, setNewTaskName] = useState('')
-    const [tasksList, setTasksList] = useState(props.tasks)
-
-    console.log(props.tasks);
-   
+    const [tasks, setTasks] = useState(props.tasks)
+    
+    useEffect(() => {
+        setTasks(props.tasks)
+    }, [props]) //auto update tasks while their data in parent file changes
 
     function makeNewTask() {
         let obj: Task = {id: props.tasks[props.tasks.length - 1].id + 1,
@@ -27,13 +29,7 @@ export default function TodoList(props: PropsType) {
         props.addTask(obj)
         setNewTaskName('')
     }
-console.log('list');
 
-    useEffect(() => {
-        // console.log(props.tasks);
-        console.log('taskslist');
-        setTasksList(props.tasks)
-    }, [props.tasks])
     
   return (
     <>
@@ -48,7 +44,7 @@ console.log('list');
         </div>
         <div>
             <ul>
-                {tasksList.map((task, key) => {
+                {tasks.map((task, key) => {
                     return <li key={key}>
                         <span>{task.name}</span>
                         <input type="checkbox" 
@@ -59,9 +55,9 @@ console.log('list');
                 })}
             </ul>
             <div>
-                <button>All</button>
-                <button>Completed</button>
-                <button>Active</button>
+                <button onClick={() => props.setFilterType('all')}>All</button>
+                <button onClick={() => props.setFilterType('done')}>Completed</button>
+                <button onClick={() => props.setFilterType('active')}>Active</button>
             </div>
         </div>
     </>
