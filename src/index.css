@@ -9,3 +9,13 @@
 ul {
   list-style: none;
 }
+.main-container {
+  display: flex;
+}
+.todo-container {
+    border: 2px solid orange;
+    width: fit-content;
+    padding: 30px 25px;
+    margin-right: 20px;
+    height: fit-content;
+}

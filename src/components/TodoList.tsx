@@ -32,7 +32,7 @@ export default function TodoList(props: PropsType) {
 
     
   return (
-    <>
+    <div className='todo-container'>
         <h3>{props.title}</h3>
         <div>
             <input type="text" onChange={(e) => setNewTaskName(e.target.value)} value={newTaskName}/>
@@ -44,7 +44,7 @@ export default function TodoList(props: PropsType) {
         </div>
         <div>
             <ul>
-                {tasks.map((task, key) => {
+                {tasks.length ? tasks.map((task, key) => {
                     return <li key={key}>
                         <span>{task.name}</span>
                         <input type="checkbox" 
@@ -52,7 +52,9 @@ export default function TodoList(props: PropsType) {
                             onChange={() => props.changeIsDone(task.id)}/>
                         <button onClick={() => props.deleteTask(task.id)}>x</button>
                     </li>
-                })}
+                })
+                : <h5>no tasks</h5>
+            }
             </ul>
             <div>
                 <button onClick={() => props.setFilterType('all')}>All</button>
@@ -60,6 +62,6 @@ export default function TodoList(props: PropsType) {
                 <button onClick={() => props.setFilterType('active')}>Active</button>
             </div>
         </div>
-    </>
+    </div>
   )
 }

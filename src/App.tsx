@@ -49,13 +49,23 @@ function App() {
   }
   return (
     <div className="App">
-      <TodoList 
-        title={'My tasks'} 
-        tasks={tasksToShow} 
-        deleteTask={deleteTask} 
-        changeIsDone={changeIsDone}
-        setFilterType={filterTasks}
-        addTask={addTask}/>
+      <h1>My tasks</h1>
+      <div className='main-container'>
+        <TodoList 
+          title={'My tasks'} 
+          tasks={tasksToShow} 
+          deleteTask={deleteTask} 
+          changeIsDone={changeIsDone}
+          setFilterType={filterTasks}
+          addTask={addTask}/>
+          <TodoList 
+          title={'My tasks'} 
+          tasks={tasksToShow} 
+          deleteTask={deleteTask} 
+          changeIsDone={changeIsDone}
+          setFilterType={filterTasks}
+          addTask={addTask}/>
+      </div>
     </div>
   );
 }
