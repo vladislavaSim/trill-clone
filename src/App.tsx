@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import TodoList, { Task } from './components/TodoList';
+import { v1 } from 'uuid';
 
 
 let tasks1: Task[] = [
-  {id: 1, name: 'wash a cat', isDone: false},
-  {id: 2, name: 'eat a sandwich', isDone: false},
-  {id: 3, name: 'go for a walk', isDone: false},
-  {id: 4, name: 'learn TS', isDone: false}
+  {id: v1(), name: 'wash a cat', isDone: false},
+  {id: v1(), name: 'eat a sandwich', isDone: false},
+  {id: v1(), name: 'go for a walk', isDone: false},
+  {id: v1(), name: 'learn TS', isDone: false}
 ]
 
 function App() {
   const [tasks, setTasks] = useState(tasks1)
   const [tasksToShow, setTasksToShow] = useState(tasks)
   
-  function deleteTask(id: number) {
+  function deleteTask(id: string) {
     setTasks(tasks.filter(t => t.id !== id))
   }
 
@@ -25,7 +26,7 @@ function App() {
     setTasksToShow(tasks)
   }, [tasks])
 
-  function changeIsDone(id: number) {
+  function changeIsDone(id: string) {
 
    let updatedTasks = tasks.map(t => {
       if(t.id === id) {

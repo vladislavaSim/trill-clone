@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 export type Task = {
-    id: number,
+    id: string,
     name: string,
     isDone: boolean
 }
@@ -9,9 +9,9 @@ export type Task = {
 type PropsType = {
     title: string | undefined,
     tasks: Task[],
-    deleteTask: (id: number) => void
+    deleteTask: (id: string) => void
     addTask: (task: Task) => void
-    changeIsDone: (id: number) => void
+    changeIsDone: (id: string) => void
     setFilterType: (filterType: string) => void
 }
 export default function TodoList(props: PropsType) {
