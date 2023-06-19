@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { v1 } from 'uuid'
 
 export type Task = {
     id: string,
@@ -23,7 +24,7 @@ export default function TodoList(props: PropsType) {
     }, [props]) //auto update tasks while their data in parent file changes
 
     function makeNewTask() {
-        let obj: Task = {id: props.tasks[props.tasks.length - 1].id + 1,
+        let obj: Task = {id: v1(),
                         name: newTaskName, 
                         isDone: false};
         props.addTask(obj)
@@ -45,6 +46,7 @@ export default function TodoList(props: PropsType) {
         <div>
             <ul>
                 {tasks.length ? tasks.map((task, key) => {
+                    console.log(task)
                     return <li key={key}>
                         <span>{task.name}</span>
                         <input type="checkbox" 

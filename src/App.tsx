@@ -59,13 +59,7 @@ function App() {
           changeIsDone={changeIsDone}
           setFilterType={filterTasks}
           addTask={addTask}/>
-          <TodoList 
-          title={'My tasks'} 
-          tasks={tasksToShow} 
-          deleteTask={deleteTask} 
-          changeIsDone={changeIsDone}
-          setFilterType={filterTasks}
-          addTask={addTask}/>
+      
       </div>
     </div>
   );
